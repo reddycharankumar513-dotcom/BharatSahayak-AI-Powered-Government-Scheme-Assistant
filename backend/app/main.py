@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse
 from sqlalchemy.orm import Session
 import logging
 
@@ -43,8 +44,9 @@ app = FastAPI(
     title="JanSathi AI API",
     description="Backend API for JanSathi AI - Multilingual Government Services Assistant for Bharat",
     version=settings.VERSION,
-    docs_url="/docs",
-    redoc_url="/redoc"
+    docs_url="/api/docs",
+    redoc_url="/api/redoc",
+    openapi_url="/api/openapi.json"
 )
 
 # Configure CORS
@@ -66,7 +68,12 @@ app.include_router(documents_router, prefix=settings.API_V1_STR)
 app.include_router(guides_router, prefix=settings.API_V1_STR)
 app.include_router(admin_router, prefix=settings.API_V1_STR)
 
+@app.get("/docs", include_in_schema=False)
+def docs_redirect():
+    return RedirectResponse(url="/api/docs")
+
 @app.get("/")
+@app.get("/api")
 def read_root():
     return {
         "app": "JanSathi AI",

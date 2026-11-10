@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useLanguage } from '@/lib/language-context';
 import { useAuth } from '@/lib/auth-context';
-import { apiRequest } from '@/services/api';
+import { apiRequest, uploadFileRequest } from '@/services/api';
 import { 
   FileText, 
   UploadCloud, 
@@ -114,19 +114,7 @@ export default function DocumentsPage() {
     formData.append('document_type', documentType);
 
     try {
-      const savedToken = localStorage.getItem('jansathi_token');
-      const res = await fetch('http://localhost:8000/api/documents/upload', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${savedToken}`
-        },
-        body: formData
-      });
-
-      if (!res.ok) {
-        throw new Error('Upload failed');
-      }
-
+      await uploadFileRequest('/documents/upload', formData);
       setSelectedFile(null);
       await loadDocuments();
       await checkReadiness(selectedScheme);
