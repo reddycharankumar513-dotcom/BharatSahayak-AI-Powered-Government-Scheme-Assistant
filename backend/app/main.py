@@ -11,6 +11,11 @@ from backend.app.database.base import Base
 from backend.app.api.auth import router as auth_router
 from backend.app.api.schemes import router as schemes_router
 from backend.app.api.dashboard import router as dashboard_router
+from backend.app.api.chat import router as chat_router
+from backend.app.api.eligibility import router as eligibility_router
+from backend.app.api.documents import router as documents_router
+from backend.app.api.guides import router as guides_router
+from backend.app.api.admin import router as admin_router
 # Import all models to ensure they are registered with Base metadata
 from backend.app.models import (
     User,
@@ -55,6 +60,11 @@ app.add_middleware(
 app.include_router(auth_router, prefix=settings.API_V1_STR)
 app.include_router(schemes_router, prefix=settings.API_V1_STR)
 app.include_router(dashboard_router, prefix=settings.API_V1_STR)
+app.include_router(chat_router, prefix=settings.API_V1_STR)
+app.include_router(eligibility_router, prefix=settings.API_V1_STR)
+app.include_router(documents_router, prefix=settings.API_V1_STR)
+app.include_router(guides_router, prefix=settings.API_V1_STR)
+app.include_router(admin_router, prefix=settings.API_V1_STR)
 
 @app.get("/")
 def read_root():

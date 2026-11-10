@@ -216,6 +216,14 @@ export default function SchemeDetailPage() {
               <span>{language === 'te' ? 'AI ని ప్రశ్నలు అడగండి' : 'Ask JanSathi AI'}</span>
             </Link>
 
+            <Link
+              href={`/guide/${scheme.slug}`}
+              className="flex items-center gap-2 py-3 px-4 rounded-xl bg-blue-50 border border-blue-200 text-blue-900 hover:bg-blue-100 text-xs sm:text-sm font-bold transition-all"
+            >
+              <ListChecks className="w-4 h-4 text-blue-600" />
+              <span>{language === 'te' ? 'దరఖాస్తు గైడ్' : 'Application Guide'}</span>
+            </Link>
+
             <a
               href={scheme.official_website}
               target="_blank"

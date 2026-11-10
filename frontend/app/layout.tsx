@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import { LanguageProvider } from '@/lib/language-context';
 import { AuthProvider } from '@/lib/auth-context';
+import AccessibilityBar from '@/components/ui/AccessibilityBar';
 import Navbar from '@/components/ui/Navbar';
 import Footer from '@/components/ui/Footer';
 
@@ -35,6 +36,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className="min-h-screen flex flex-col bg-[#FDFCFA] text-slate-900 antialiased selection:bg-orange-200 selection:text-orange-900">
+        <AccessibilityBar />
         <LanguageProvider>
           <AuthProvider>
             <Navbar />
